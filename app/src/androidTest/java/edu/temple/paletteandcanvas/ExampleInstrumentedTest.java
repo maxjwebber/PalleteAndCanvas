@@ -1,4 +1,4 @@
-package edu.temple.palleteandcanvas;
+package edu.temple.paletteandcanvas;
 
 import android.content.Context;
 

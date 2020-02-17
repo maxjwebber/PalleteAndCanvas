@@ -1,4 +1,4 @@
-package edu.temple.coloractivity;
+package edu.temple.paletteandcanvas;
 
 import android.content.Context;
 import android.graphics.Color;
