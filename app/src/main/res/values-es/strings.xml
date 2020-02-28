@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Paleta y Lienzo</string>
+    <string name="act_name1">Actividad de Paleta</string>
+    <string name="act_name2">Actividad de Lienzo</string>
+    <string-array name="colors">
+        <item>Selecciona un color.</item>
+        <item>Fucsia</item>
+        <item>Rojo</item>
+        <item>Amarillo</item>
+        <item>Oliva</item>
+        <item>Verde</item>
+        <item>Cian</item>
+        <item>Azul</item>
+        <item>Morado</item>
+        <item>Magenta</item>
+        <item>Gris Oscuro</item>
+        <item>Plata</item>
+    </string-array>
+</resources>

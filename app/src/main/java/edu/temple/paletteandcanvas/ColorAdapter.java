@@ -9,15 +9,16 @@ import android.widget.TextView;
 
 public class ColorAdapter extends BaseAdapter
 {
-    boolean isDropped;
+
     private Context context;
     private String[] colors;
+    private String[] colorsLocal;
 
-    public ColorAdapter(Context context, String[] colors)
+    public ColorAdapter(Context context, String[] colors,String[] colorsLocal)
     {
         this.context=context;
         this.colors=colors;
-        this.isDropped = false;
+        this.colorsLocal=colorsLocal;
     }
 
     @Override
@@ -40,12 +41,13 @@ public class ColorAdapter extends BaseAdapter
     public TextView getView(int position, View convertView, ViewGroup parent)
     {
         TextView textView = new TextView(context);
-        textView.setText(colors[position]);
+        textView.setText(colorsLocal[position]);
         return textView;
     }
 
     @Override
     public TextView getDropDownView(int position, View convertView, ViewGroup parent) {
+
         TextView textView = getView(position,convertView,parent);
         if (position>0)
             textView.setBackgroundColor(Color.parseColor(colors[position]));

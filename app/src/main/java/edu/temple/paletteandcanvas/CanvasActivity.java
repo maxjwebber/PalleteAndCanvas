@@ -16,9 +16,10 @@ public class CanvasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canvas);
         String myColor = getIntent().getStringExtra("myColor");
+        String myLabel = getIntent().getStringExtra("myLabel");
         findViewById(R.id.layout2).setBackgroundColor(Color.parseColor(myColor));
         TextView colorDisplay = findViewById(R.id.colorDisplay);
-        colorDisplay.setText(myColor);
+        colorDisplay.setText(myLabel);
 
     }
 }

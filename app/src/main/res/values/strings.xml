@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">Palette and Canvas</string>
     <string name="act_name1">Palette Activity</string>
-    <string name="act_name2">Palette Activity</string>
+    <string name="act_name2">Canvas Activity</string>
+    <string-array name="colors">
+
+        <item>Select a color.</item>
+        <item>Fuchsia</item>
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>Olive</item>
+        <item>Green</item>
+        <item>Cyan</item>
+        <item>Blue</item>
+        <item>Purple</item>
+        <item>Magenta</item>
+        <item>DarkGray</item>
+        <item>Silver</item>
+    </string-array>
 </resources>
