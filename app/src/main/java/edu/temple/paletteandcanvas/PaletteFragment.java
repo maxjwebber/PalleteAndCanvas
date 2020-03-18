@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import edu.temple.paletteandcanvas.R;
 
@@ -39,6 +41,26 @@ public class PaletteFragment extends Fragment {
         return fragment;
     }
 
+    OnColorSelectedListener parentActivity;
+
+    // This interface can be implemented by the Activity, parent Fragment,
+    // or a separate test implementation.
+    public interface OnColorSelectedListener {
+        public void onColorSelected(String colorString);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof OnColorSelectedListener) {
+            parentActivity = (OnColorSelectedListener) context;
+        } else {
+            throw new RuntimeException("Please Implement the OnColorSelectedListener Interface");
+        }
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +73,24 @@ public class PaletteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_palette, container, false);
+        ColorAdapter colorAdapter = new ColorAdapter(container.getContext(),colorsToParse,colorLabels);
+        Spinner spinner = (Spinner) v.findViewById(R.id.spinner);
+        spinner.setAdapter(colorAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position>0)
+                    parentActivity.onColorSelected(colorsToParse[position]);
+                else
+                    parentActivity.onColorSelected("WHITE");
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_palette, container, false);
+        return v;
 
     }
 

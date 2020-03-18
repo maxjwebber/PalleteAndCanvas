@@ -1,6 +1,9 @@
 package edu.temple.paletteandcanvas;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +22,16 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.getDefault;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PaletteFragment.OnColorSelectedListener{
+
+
+    public void onColorSelected(String colorString)
+    {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.container2, CanvasFragment.newInstance(colorString))
+                .commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,22 +43,10 @@ public class MainActivity extends AppCompatActivity {
         defConfig.setLocale(ENGLISH);
         final String[] colors = context.createConfigurationContext(defConfig)
                 .getResources().getStringArray(R.array.colors);
-        ColorAdapter colorAdapter = new ColorAdapter(this,colors,colorsLocal);
-        Spinner spinner = findViewById(R.id.spinner);
-        spinner.setAdapter(colorAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position>0) {
-                    Intent intent = new Intent(context, CanvasActivity.class);
-                    intent.putExtra("myColor",colors[position]);
-                    intent.putExtra("myLabel",colorsLocal[position]);
-                    context.startActivity(intent);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        });
+        PaletteFragment paletteFragment = PaletteFragment.newInstance(colorsLocal,colors);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.container1, paletteFragment)
+                .commit();
     }
 }
